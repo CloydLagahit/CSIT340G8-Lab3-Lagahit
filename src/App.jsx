@@ -1,43 +1,35 @@
-const Header = (props) => {
-  return <h1>{props.course}</h1>
-}
+const Header = (props) => <h1>{props.course}</h1>
 
-const Part = (props) => {
-  return <p>{props.name} {props.exercises}</p>
-}
+const Part = (props) => <p>{props.part.name} {props.part.units}</p>
 
-const Content = (props) => {
-  return (
-    <div>
-      <Part name={props.part1} exercises={props.exercises1} />
-      <Part name={props.part2} exercises={props.exercises2} />
-      <Part name={props.part3} exercises={props.exercises3} />
-    </div>
-  )
-}
+const Content = (props) => (
+  <div>
+    <Part part={props.part1} />
+    <Part part={props.part2} />
+    <Part part={props.part3} />
+  </div>
+)
 
-const Total = (props) => {
-  return <p>Number of exercises {props.total}</p>
-}
+const Total = (props) => <p>Number of units {props.total}</p>
+
+const Footer = ({ fullName, courseCode, section }) => (
+  <footer style={{ marginTop: 32, paddingTop: 12, borderTop: '1px solid #ccc', color: '#555' }}>
+    {fullName} - {courseCode} - {section}
+  </footer>
+)
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const course = 'Bachelor of Science in Information Technology'
+  const part1 = { name: 'Data Structures and Algorithms', units: 3 }
+  const part2 = { name: 'Web Systems and Technologies', units: 3 }
+  const part3 = { name: 'Discrete Mathematics', units: 3 }
 
   return (
-    <div>
+    <div style={{ maxWidth: 600, margin: '40px auto', fontFamily: 'sans-serif', textAlign: 'left' }}>
       <Header course={course} />
-      <Content
-        part1={part1} exercises1={exercises1}
-        part2={part2} exercises2={exercises2}
-        part3={part3} exercises3={exercises3}
-      />
-      <Total total={exercises1 + exercises2 + exercises3} />
+      <Content part1={part1} part2={part2} part3={part3} />
+      <Total total={part1.units + part2.units + part3.units} />
+      <Footer fullName="Cloyd Lagahit" courseCode="CSIT340" section="G8" />
     </div>
   )
 }
